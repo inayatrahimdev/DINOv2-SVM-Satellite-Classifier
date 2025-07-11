@@ -1,6 +1,5 @@
 # Satellite / GIS Image Classifier (DINOv2 + SVM)
 
-**Author**: Inayat Rahim  
 **Model**: Facebook AI's DINOv2 (ViT-S/14) + Linear SVM  
 **Dataset**: [EuroSAT RGB](https://github.com/phelber/EuroSAT)  
 **App**: [Streamlit Demo](https://dinov2-svm-satellite-classifier-jeyguhu5uhlnhmgtkqlrpe.streamlit.app/)
