@@ -118,15 +118,16 @@ This repository is distributed under the MIT License. See `LICENSE` for full det
 
 ---
 
-## Maintainer
+## Contact
 
-**Inayat Rahim**
-BS Artificial Intelligence — Pakistan
-Open to research collaborations and AI internships.
+Contact
+If you’re interested in research collaboration, internships, or project development:
 
-* 🌐 Portfolio: [ai-innovator-inayat.vercel.app](https://ai-innovator-inayat.vercel.app)
-* 💻 GitHub: [github.com/inayatrahim](https://github.com/inayatrahim)
-* 🔗 LinkedIn: [linkedin.com/in/inayatrahim](https://linkedin.com/in/inayatrahim)
+Website: inayatrahim.me
+
+LinkedIn: linkedin.com/in/inayat-rahim-b0655b29b
+
+GitHub: github.com/inayatrahimdev
 
 ````
 
