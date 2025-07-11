@@ -1,0 +1,9 @@
+streamlit
+torch
+torchvision
+numpy
+Pillow
+scikit-learn
+matplotlib
+seaborn
+joblib
