@@ -123,12 +123,12 @@ This repository is distributed under the MIT License. See `LICENSE` for full det
 Contact
 If you’re interested in research collaboration, internships, or project development:
 
-Website: inayatrahim.me
+Website: https://www.inayatrahim.me
 
-LinkedIn: linkedin.com/in/inayat-rahim-b0655b29b
+LinkedIn: https://www.linkedin.com/in/inayat-rahim-b0655b29b
 
-GitHub: github.com/inayatrahimdev
+GitHub: https://www.github.com/inayatrahimdev
 
-````
+```
 
 
