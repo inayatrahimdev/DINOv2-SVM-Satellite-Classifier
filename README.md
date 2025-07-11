@@ -117,18 +117,11 @@ Below is the confusion matrix based on the test set:
 This repository is distributed under the MIT License. See `LICENSE` for full details.
 
 ---
-
 ## Contact
 
-Contact
-If you’re interested in research collaboration, internships, or project development:
-
-Website: https://www.inayatrahim.me
-
-LinkedIn: https://www.linkedin.com/in/inayat-rahim-b0655b29b
-
+Website: https://www.inayatrahim.me  
+LinkedIn: https://www.linkedin.com/in/inayat-rahim-b0655b29b  
 GitHub: https://www.github.com/inayatrahimdev
 
-```
-
+---
 
