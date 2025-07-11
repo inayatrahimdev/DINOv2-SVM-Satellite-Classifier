@@ -16,14 +16,19 @@ class_names = np.load("class_names.npy", allow_pickle=True)
 # ✅ Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# ✅ Load DINOv2 model
+# ✅ Load DINOv2 model from local repo (fixed to use your local dinov2_repo)
 @st.cache_resource
 def load_dino():
-    model = torch.hub.load("facebookresearch/dinov2", "dinov2_vits14")
+    model = torch.hub.load(
+        repo_or_dir="dinov2_repo",        # ✔️ Path to your local cloned repo
+        model="dinov2_vits14",            # ✔️ The model name from hubconf.py
+        source="local"                    # ✔️ Local source to avoid GitHub pull
+    )
     model.eval()
     model.to(device)
     return model
 
+# ✅ Load model
 dino = load_dino()
 
 # ✅ Image Transform
