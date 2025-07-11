@@ -1,127 +1,133 @@
-# 🛰️ Satellite Image Classifier (DINOv2 + SVM)
+# Satellite / GIS Image Classifier (DINOv2 + SVM)
 
-A high-performance remote sensing image classifier leveraging the power of self-supervised visual transformers (**DINOv2**) combined with a lightweight **Support Vector Machine (SVM)** for downstream classification.
-
-> 🔗 **Live Demo**: [Streamlit App](https://dinov2-svm-satellite-classifier-jeyguhu5uhlnhmgtkqlrpe.streamlit.app/)
-
----
-
-## Overview
-
-This project classifies satellite and GIS imagery into defined categories using learned embeddings from Meta AI's **DINOv2 ViT-S/14 model**, followed by an **SVM classifier** trained on top of those embeddings.
-
-The goal is to enable **real-time, accurate classification** of remote sensing data with a lightweight, interpretable model pipeline.
+**Author**: Inayat Rahim  
+**Model**: Facebook AI's DINOv2 (ViT-S/14) + Linear SVM  
+**Dataset**: [EuroSAT RGB](https://github.com/phelber/EuroSAT)  
+**App**: [Streamlit Demo](https://dinov2-svm-satellite-classifier-jeyguhu5uhlnhmgtkqlrpe.streamlit.app/)
 
 ---
 
-## 🧠 Model Architecture
+## Project Overview
 
-- **Feature Extractor**: `DINOv2 ViT-S/14` from a locally cloned FacebookResearch repo.
-- **Classifier**: `scikit-learn SVM` trained on DINOv2 embeddings.
-- **Deployment**: Streamlit UI for interactive uploads and real-time predictions.
+This application enables real-time classification of satellite and remote sensing images into 10 land use/land cover categories using features extracted from a pretrained DINOv2 Vision Transformer (ViT-S/14) and a lightweight SVM classifier.
 
----
-
-## 🛰️ Use Case
-
-- Classifying **satellite** or **aerial imagery** for:
-  - Land use & land cover (LULC)
-  - Urbanization tracking
-  - Environmental monitoring
-  - Agriculture & forestry segmentation
+It is designed for practical use in Earth observation, urban planning, environmental monitoring, and GIS analysis workflows.
 
 ---
 
-## 🚀 How It Works
+## Class Labels
 
-1. **User uploads an image**
-2. **DINOv2** generates high-dimensional visual embeddings
-3. **SVM classifier** predicts the class from the learned embedding
-4. **Results are displayed instantly** with class label and visualization
-
----
-
-## 🧪 Confusion Matrix (Validation)
-
-Below is the confusion matrix on the held-out test set, indicating per-class prediction performance.
-
-![Confusion Matrix](confusion_matrix.png)
+- AnnualCrop
+- Forest
+- HerbaceousVegetation
+- Highway
+- Industrial
+- Pasture
+- PermanentCrop
+- Residential
+- River
+- SeaLake
 
 ---
 
-## 🛠️ Setup Instructions
+## Model Architecture
 
-1. **Clone the repo**
+- **Backbone**: DINOv2 (`dinov2_vits14`) pretrained on LVD-142M
+- **Feature Extractor**: TorchHub, inference only
+- **Classifier**: Scikit-learn linear SVM (`C=1.0`)
+- **Image Transformations**:
+  - Resize: `244`
+  - CenterCrop: `224`
+  - Normalize: `[0.5], [0.5]`
+
+---
+
+## Deployment
+
+**Compatible with Streamlit Cloud**
+
+### Prerequisites
+
+- Python 3.9–3.11
+- GPU optional (DINOv2 supports CPU inference)
+- Required files:
+  - `app.py`
+  - `dino_svm_classifier.pkl`
+  - `class_names.npy`
+  - `requirements.txt`
+
+### Setup Instructions
 
 ```bash
-git clone https://github.com/inayatrahimdev/DINOv2-SVM-Satellite-Classifier.git
-cd DINOv2-SVM-Satellite-Classifier
+git clone https://github.com/inayatrahimdev/satellite-dino-svm
+cd satellite-dino-svm
+pip install -r requirements.txt
+streamlit run app.py
 ````
 
-2. **Install dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-3. **Run the Streamlit app**
-
-```bash
-streamlit run app.py
-```
 ---
 
-## 📂 Project Structure
+## Usage
 
-```
-├── app.py                     # Streamlit frontend + classifier pipeline
-├── dino_svm_classifier.pkl    # Trained SVM model
-├── class_names.npy            # Class label mapping
-├── dinov2_repo/               # Local DINOv2 repo (hubconf.py + model checkpoints)
-├── confusion_matrix.png       # Model performance visualization
-├── requirements.txt           # Python dependencies
-└── README.md                  # You're reading it
-```
+1. Upload a `.jpg`, `.png`, or `.jpeg` satellite image.
+2. The model runs DINOv2 on the image to extract visual embeddings.
+3. Embeddings are passed to a trained SVM for classification.
+4. Output shows predicted land cover class.
 
 ---
 
-## 📌 Requirements
+## Performance
 
-* Python ≥ 3.8
-* PyTorch ≥ 2.0
-* Streamlit
-* torchvision
-* scikit-learn
-* numpy
-* Pillow
-* joblib
+* **Accuracy**: 95.09%
+* **Macro F1-score**: 0.95
+* **Model Size**: \~10.8MB (`.pkl`)
+* **Inference Time**: <1 second (per image, CPU)
 
 ---
 
-## ✍️ Citation
+## Confusion Matrix
 
-If you use this codebase in research or teaching, consider citing the original DINOv2 paper:
+Below is the confusion matrix based on the test set:
 
-```
-@article{oquab2023dinov2,
-  title={DINOv2: Learning Robust Visual Features without Supervision},
-  author={Oquab, Maxime and Darcet, Hugo and Moutakanni, Theo and others},
-  journal={arXiv preprint arXiv:2304.07193},
-  year={2023}
-}
-```
+<p align="center">
+  <img src="confusion_matrix.png" alt="Confusion Matrix" width="600">
+</p>
 
 ---
 
-## 📬 Contact
+## Dataset Reference
 
-Built by [Inayat Rahim](https://github.com/inayatrahimdev)
-For collaborations or academic use, feel free to open an issue or reach out via email.
+* **Source**: EuroSAT RGB
+* **License**: MIT License
+* **Link**: [https://github.com/phelber/EuroSAT](https://github.com/phelber/EuroSAT)
 
 ---
 
-## 🧭 License
+## Future Enhancements
 
-This project is released under the MIT License.
+* Batch classification interface
+* Top-k prediction confidence display
+* FastAPI/Flask backend for deployment as REST service
+* Comparison across multiple ViT backbones (Swin, DeiT, DINOv2-G)
 
-```
+---
+
+## License
+
+This repository is distributed under the MIT License. See `LICENSE` for full details.
+
+---
+
+## Maintainer
+
+**Inayat Rahim**
+BS Artificial Intelligence — Pakistan
+Open to research collaborations and AI internships.
+
+* 🌐 Portfolio: [ai-innovator-inayat.vercel.app](https://ai-innovator-inayat.vercel.app)
+* 💻 GitHub: [github.com/inayatrahim](https://github.com/inayatrahim)
+* 🔗 LinkedIn: [linkedin.com/in/inayatrahim](https://linkedin.com/in/inayatrahim)
+
+````
+
+
